@@ -265,11 +265,15 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     public function sendEmail($password = '') {
-        $message = \Yii::$app->mailer->compose(['html'=>'facebookSignUp-html'], ['user' => $this, 'password' => $password]);
-        $message->setFrom([\Yii::$app->params['supportEmail'] => 'Your Company Name']);
-        $message->setTo($this->email);
-        $message->setSubject('Welcome to ' . \Yii::$app->name);
-        $message->send();
+		try {
+			$message = \Yii::$app->mailer->compose(['html'=>'facebookSignUp-html'], ['user' => $this, 'password' => $password]);
+			$message->setFrom([\Yii::$app->params['supportEmail'] => 'Your Company Name']);
+			$message->setTo($this->email);
+			$message->setSubject('Welcome to ' . \Yii::$app->name);
+			return $message->send();
+		} catch(ErrorException $e) {
+			return false;
+        }
     }
 
     public function getUserPhase() {
