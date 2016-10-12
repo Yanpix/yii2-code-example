@@ -11,7 +11,7 @@
 
 <h3>UserController.php</h3>
 <b>An example of User controller for REST API.</b>
-<b>Features</b>
+<h4>Features</h4>
 <ul>
 <li>Http Bearer Authentication</li>
 <li>Sign in/sign up via Facebook</li>
